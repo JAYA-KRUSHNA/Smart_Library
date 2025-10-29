@@ -18,7 +18,7 @@ UNIVERSAL_ADMIN_PASSWORD = 'admin123'
 app = Flask(__name__)
 
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'a_super_secret_fallback_key_that_should_be_changed_in_prod')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(app.root_path, 'instance', 'library.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///' + os.path.join(app.root_path, 'instance', 'library.db'))
 db = SQLAlchemy(app)
 
 # Add a teardown function to close the session and release the lock
